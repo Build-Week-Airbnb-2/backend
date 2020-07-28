@@ -14,6 +14,18 @@ router.get('/', (req, res) => {
     .catch((err) => res.send(err));
 });
 
+// router.get('/:id', (req, res) => {
+//   const { id } = req.params;
+//   Users.findById(id)
+//     .then((user) => {
+//       res.status(200).json({
+//         email: user.email,
+//         data: user,
+//       });
+//     })
+//     .catch((err) => res.send(err));
+// });
+
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;

@@ -11,6 +11,21 @@ router.get('/', (req, res) => {
     .catch((err) => res.send(err));
 });
 
+router.post('/', (req, res) => {
+  const info = req.body;
+
+  Listings.add(info)
+    .then((feature) => {
+      res.status(201).json({
+        name: feature.name,
+        features: feature,
+      });
+    })
+    .catch((err) =>
+      res.status(500).json({ error: 'this is the error', err }),
+    );
+});
+
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
