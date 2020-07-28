@@ -30,6 +30,10 @@ router.post('/register', (req, res) => {
   }
 });
 
+router.get('/register', (req, res) => {
+  res.status(200).json({ message: 'registration page' });
+});
+
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -41,9 +45,10 @@ router.post('/login', (req, res) => {
         if (user && bcryptjs.compareSync(password, user.password)) {
           const token = makeJwt(user);
 
-          res
-            .status(200)
-            .json({ message: 'Welcome to our API', token });
+          res.status(200).json({
+            message: 'welcome to the airbnb optimal pricing API',
+            token,
+          });
         } else {
           res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -56,6 +61,10 @@ router.post('/login', (req, res) => {
       message: 'please provide email and password',
     });
   }
+});
+
+router.get('/login', (req, res) => {
+  res.status(200).json({ message: 'login page' });
 });
 
 function makeJwt(user) {
