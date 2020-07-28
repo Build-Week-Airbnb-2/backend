@@ -1,5 +1,9 @@
 # Airbnb Optimal Pricing Web API
 
+## Base URL:
+
+https://airbnboptimalpricing.herokuapp.com/
+
 ## User Requirements:
 
 - a unique `email`
