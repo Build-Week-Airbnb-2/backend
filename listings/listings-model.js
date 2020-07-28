@@ -10,16 +10,16 @@ module.exports = {
 };
 
 function find() {
-  return db('listings').select('id').orderBy('id');
+  return db('features').select('*').orderBy('id');
 }
 
 function findBy(filter) {
-  return db('listings').where(filter);
+  return db('features').where(filter);
 }
 
 async function add(listing) {
   try {
-    const [id] = await db('listings').insert(listing, 'id');
+    const [id] = await db('features').insert(listing, 'id');
 
     return findById(id);
   } catch (error) {
@@ -28,11 +28,11 @@ async function add(listing) {
 }
 
 function findById(id) {
-  return db('listings').where({ id }).first();
+  return db('features').where({ id }).first();
 }
 
 function update(id, changes) {
-  return db('listings')
+  return db('features')
     .where({ id })
     .update(changes)
     .then(() => {
@@ -41,5 +41,5 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  return db('listings').where('id', Number(id)).del();
+  return db('features').where('id', Number(id)).del();
 }
