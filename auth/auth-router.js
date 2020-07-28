@@ -63,6 +63,37 @@ router.post('/login', (req, res) => {
   }
 });
 
+router.put('/login/:id', (req, res) => {
+  const { id } = req.params;
+  const credentials = req.body;
+
+  if (isValid(credentials)) {
+    const rounds = process.env.BCRYPT_ROUNDS || 8;
+
+    const hash = bcryptjs.hashSync(credentials.password, rounds);
+
+    credentials.password = hash;
+
+    Users.update(id, credentials)
+      .then((user) => {
+        if (user) {
+          res.status(201).json({ data: user });
+        } else {
+          res
+            .status(404)
+            .json({ message: 'could not find user with given id' });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({ message: error.message });
+      });
+  } else {
+    res.status(400).json({
+      message: 'please provide email and password',
+    });
+  }
+});
+
 router.get('/login', (req, res) => {
   res.status(200).json({ message: 'login page' });
 });
