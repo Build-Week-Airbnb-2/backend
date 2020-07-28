@@ -6,7 +6,8 @@ const Listings = require('./listings-model');
 router.get('/', (req, res) => {
   Listings.find()
     .then((listings) => {
-      res.status(200).json({ data: listings });
+      console.log(listings);
+      res.status(200).json({ listings });
     })
     .catch((err) => res.send(err));
 });
@@ -22,7 +23,7 @@ router.post('/', (req, res) => {
       });
     })
     .catch((err) =>
-      res.status(500).json({ error: 'this is the error', err }),
+      res.status(500).json({ error: 'unable to add listing' }),
     );
 });
 
