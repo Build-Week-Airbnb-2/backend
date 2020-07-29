@@ -37,37 +37,37 @@ module.exports = {
     },
   },
 
-  // production: {
-  //   client: 'sqlite3',
-  //   useNullAsDefault: true,
-  //   connection: {
-  //     filename: './database/airbnb.db3',
-  //   },
-  //   pool: {
-  //     afterCreate: (conn, done) => {
-  //       conn.run('PRAGMA foreign_keys = ON', done);
-  //     },
-  //   },
-  //   migrations: {
-  //     directory: './database/migrations',
-  //   },
-  //   seeds: {
-  //     directory: './database/seeds',
-  //   },
-  // },
-
   production: {
-    client: 'pg',
-    connection: pgConnection,
+    client: 'sqlite3',
+    useNullAsDefault: true,
+    connection: {
+      filename: './database/airbnb.db3',
+    },
     pool: {
-      min: 2,
-      max: 10,
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      },
     },
     migrations: {
-      directory: './data/migrations',
+      directory: './database/migrations',
     },
     seeds: {
-      directory: './data/seeds',
+      directory: './database/seeds',
     },
   },
+
+  // production: {
+  //   client: 'pg',
+  //   connection: pgConnection,
+  //   pool: {
+  //     min: 2,
+  //     max: 10,
+  //   },
+  //   migrations: {
+  //     directory: './data/migrations',
+  //   },
+  //   seeds: {
+  //     directory: './data/seeds',
+  //   },
+  // },
 };
