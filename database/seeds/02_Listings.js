@@ -27,7 +27,7 @@ exports.seed = function (knex) {
           number_of_reviews: 4,
           transit_len:
             'There is a bus stop at the end of the street!',
-          amenities: 'Internet, Wifi, Kitchen, Laundry',
+          name: 'Silver Lake House',
         },
       ]);
     });

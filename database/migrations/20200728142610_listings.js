@@ -21,7 +21,6 @@ exports.up = function (knex) {
       tbl.integer('review_scores_rating').notNullable().unsigned();
       tbl.integer('number_of_reviews').notNullable().unsigned();
       tbl.string('transit_len', 256).notNullable();
-      tbl.string('amenities', 256).notNullable();
       tbl.string('name', 128);
     })
     .createTable('users_features', (tbl) => {
