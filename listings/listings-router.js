@@ -12,6 +12,27 @@ router.get('/', (req, res) => {
     .catch((err) => res.send(err));
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  Listings.findById(id)
+    .then((listing) => {
+      if (listing) {
+        res.status(200).json({
+          listing,
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: 'could not find listing with given id' });
+      }
+    })
+    .catch((err) =>
+      res.status(500).json({
+        error: 'unable to get listing',
+      }),
+    );
+});
+
 router.post('/', (req, res) => {
   const info = req.body;
 
