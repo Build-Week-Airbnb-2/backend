@@ -5,6 +5,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  findByUserId,
   update,
   remove,
 };
@@ -29,6 +30,13 @@ async function add(listing) {
 
 function findById(id) {
   return db('features').where({ id }).first();
+}
+
+function findByUserId(id) {
+  return db('users as u')
+    .where('userId', id)
+    .join('features as f', 'u.id', 'f.userId')
+    .select('*');
 }
 
 function update(id, changes) {

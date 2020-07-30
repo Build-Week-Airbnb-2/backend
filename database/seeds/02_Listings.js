@@ -28,6 +28,7 @@ exports.seed = function (knex) {
           transit_len:
             'There is a bus stop at the end of the street!',
           name: 'Silver Lake House',
+          userId: 1,
         },
       ]);
     });

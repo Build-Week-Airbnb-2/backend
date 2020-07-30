@@ -6,7 +6,6 @@ const Listings = require('./listings-model');
 router.get('/', (req, res) => {
   Listings.find()
     .then((listings) => {
-      console.log(listings);
       res.status(200).json({ listings });
     })
     .catch((err) =>
@@ -19,6 +18,27 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   Listings.findById(id)
+    .then((listing) => {
+      if (listing) {
+        res.status(200).json({
+          listing,
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: 'could not find listing with given id' });
+      }
+    })
+    .catch((err) =>
+      res.status(500).json({
+        error: 'unable to get listing',
+      }),
+    );
+});
+
+router.get('/user/:id', (req, res) => {
+  const { id } = req.params;
+  Listings.findByUserId(id)
     .then((listing) => {
       if (listing) {
         res.status(200).json({

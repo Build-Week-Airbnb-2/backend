@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const supertest = require('supertest');
 
 const server = require('../api/server');
@@ -8,11 +9,17 @@ const Listings = require('../listings/listings-model');
 
 const listingsRouter = require('../listings/listings-router');
 
+describe('environment', function () {
+  it('should be using the testing database', function () {
+    expect(process.env.DB_ENV).toBe('testing');
+  });
+});
+
 let token;
 
 const credentials = {
-  email: 'email@test.com',
-  password: 'test',
+  email: 'email@email.com',
+  password: 'email',
 };
 
 beforeAll((done) => {
@@ -30,18 +37,18 @@ describe('GET /', () => {
   test('It should require authorization', () => {
     return supertest(server)
       .get('/api/listings')
-      .then((response) => {
-        expect(response.statusCode).toBe(401);
+      .then((res) => {
+        expect(res.status).toBe(401);
       });
   });
   // send the token - should respond with a 200
   test('It responds with JSON', () => {
     return supertest(server)
       .get('/api/listings')
-      .set('Authorization', token)
-      .then((response) => {
-        expect(response.statusCode).toBe(200);
-        expect(response.type).toBe('application/json');
+      .set('Authorization', 'Bearer' + token)
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
       });
   });
 });
