@@ -9,7 +9,11 @@ router.get('/', (req, res) => {
       console.log(listings);
       res.status(200).json({ listings });
     })
-    .catch((err) => res.send(err));
+    .catch((err) =>
+      res.status(500).json({
+        error: 'unable to get listings',
+      }),
+    );
 });
 
 router.get('/:id', (req, res) => {
