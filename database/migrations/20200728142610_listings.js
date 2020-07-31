@@ -22,6 +22,13 @@ exports.up = function (knex) {
       tbl.integer('number_of_reviews').notNullable().unsigned();
       tbl.string('transit_len', 256).notNullable();
       tbl.string('name', 128);
+      tbl
+        .integer('userId')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
     })
     .createTable('users_features', (tbl) => {
       tbl.increments();
